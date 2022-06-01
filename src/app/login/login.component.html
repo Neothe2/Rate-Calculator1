@@ -3,16 +3,20 @@
 </div>
 
 <!-- User NOT logged in -->
-<ng-template #guest>
-  <h3>Howdy, GUEST</h3>
-  <p>Login to get started...</p>
+<ng-template #guest class="login">
+  <div class="login">
+    <h3>Hello, User!</h3>
+    <p>You may now login with google</p>
 
-  <button (click)="auth.googleSignin()">
-    <i class="fa fa-google"></i> Connect Google
-  </button>
+    <button class="btn btn--primary" (click)="auth.googleSignin()">
+      <a href="/">Login with Google</a>
+    </button>
+  </div>
 </ng-template>
 
 <!-- User logged in -->
 <ng-template #authenticated>
-  <a href="./">Go to main page</a>
+  <div class="login">
+    <a href="./" class="btn btn--accent">Go to main page</a>
+  </div>
 </ng-template>
