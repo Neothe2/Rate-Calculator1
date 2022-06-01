@@ -10,7 +10,7 @@
     <li><a href="#">Hosting</a></li>
   </ul>
 </nav> -->
-<nav class="nav collapsible" id="nav" (click)="toggle()" *ngIf="user">
+<!-- <nav class="nav collapsible" id="nav" (click)="toggle()" *ngIf="user">
   <a class="nav__brand" href="./index.html">
     <p>A3 panel rate calculator</p>
   </a>
@@ -29,6 +29,32 @@
       <a href="login" (click)="auth.signOut()">Logout</a>
     </li>
   </ul>
-</nav>
+</nav> -->
 
 <script src="./main.js"></script>
+
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a style="color: white" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <svg class="icon icon--white nav__toggler navbar-toggler-icon">
+        <use href="../../assets/images/sprite.svg#menu"></use>
+      </svg>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a style="color: white" class="nav-link d-flex" href="#">Home</a>
+        <a style="color: white" class="nav-link d-flex" href="#">Features</a>
+        <a style="color: white" class="nav-link d-flex" href="#">Pricing</a>
+      </div>
+    </div>
+  </div>
+</nav>

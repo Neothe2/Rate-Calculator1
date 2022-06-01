@@ -1,7 +1,21 @@
-<table class="table">
-  <tr *ngFor="let user of users" (click)="toggle(user)">
-    <td>{{ user.displayName }}</td>
-    <td>{{ user.email }}</td>
-    <td>{{ user.roles.admin }}</td>
-  </tr>
-</table>
+<div class="user-management">
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+    </tr>
+    <tr *ngFor="let user of users" (click)="toggle(user)">
+      <td>{{ user.displayName }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <input
+          type="checkbox"
+          name=""
+          id="{{ user.uid }}"
+          checked="{{ user.roles.admin }}"
+        />
+      </td>
+    </tr>
+  </table>
+</div>
