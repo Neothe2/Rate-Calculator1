@@ -1,0 +1,7 @@
+<table class="table">
+  <tr *ngFor="let user of users" (click)="toggle(user)">
+    <td>{{ user.displayName }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.roles.admin }}</td>
+  </tr>
+</table>

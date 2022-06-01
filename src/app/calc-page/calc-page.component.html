@@ -1,0 +1,31 @@
+<div *ngIf="auth.user$ | async; then authenticated; else guest">
+  <!-- template will replace this div -->
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest> </ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <table>
+    <tr>
+      <td>13245</td>
+      <td>12345</td>
+      <td>12345</td>
+    </tr>
+    <tr>
+      <td>13245</td>
+      <td>12345</td>
+      <td>12345</td>
+    </tr>
+    <tr>
+      <td>13245</td>
+      <td>12345</td>
+      <td>12345</td>
+    </tr>
+  </table>
+
+  <button (click)="auth.signOut()">Log out</button>
+</ng-template>
+
+<h1>This is the first page</h1>
