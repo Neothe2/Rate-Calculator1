@@ -1,16 +1,12 @@
-.table,
-td,
-th {
-  margin: 3rem 3rem;
-  border: 2px solid rgb(178, 178, 178);
-  padding: 1rem;
-  border-radius: 5px;
-  border-collapse: collapse;
-}
-
-.user-management {
+/* .user-management {
   height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
+} */
+
+@media screen and (max-width: 576px) {
+  .email {
+    display: none;
+  }
 }

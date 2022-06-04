@@ -11,6 +11,7 @@ import { RecordService } from '../record.service';
 export class UserManagementComponent implements OnInit {
   users: User[];
   currentUser: User;
+  currentScreenRes: number;
 
   constructor(public fs: RecordService, public auth: AuthService) {
     this.fs
@@ -20,6 +21,7 @@ export class UserManagementComponent implements OnInit {
     this.auth.user$.subscribe((data) => {
       this.currentUser = data;
     });
+    this.currentScreenRes = window.screen.width;
   }
 
   toggle(user: User) {
