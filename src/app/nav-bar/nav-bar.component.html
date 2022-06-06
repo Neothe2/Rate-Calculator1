@@ -33,9 +33,9 @@
 
 <script src="./main.js"></script>
 
-<nav class="navbar navbar-expand-lg bg-dark">
+<nav class="navbar navbar-expand-lg bg-dark d-flex sticky-top">
   <div class="container-fluid">
-    <a style="color: white" href="#">Navbar</a>
+    <a style="color: white; padding: 1rem" href="#">Navbar</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -49,11 +49,33 @@
         <use href="../../assets/images/sprite.svg#menu"></use>
       </svg>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a style="color: white" class="nav-link d-flex" href="#">Home</a>
-        <a style="color: white" class="nav-link d-flex" href="#">Features</a>
-        <a style="color: white" class="nav-link d-flex" href="#">Pricing</a>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavAltMarkup"
+    >
+      <div class="navbar-nav d-flex justify-content-end">
+        <a style="color: #d2d0db" class="nav-link" href="#">Home</a>
+        <a
+          style="color: #d2d0db"
+          class="nav-link"
+          href="user-management"
+          *ngIf="user && user.roles.admin"
+          >User Management</a
+        >
+        <a
+          style="color: #d2d0db"
+          class="nav-link"
+          href="admin"
+          *ngIf="user && user.roles.admin"
+          >Admin</a
+        >
+        <a
+          style="color: #d2d0db"
+          class="nav-link"
+          href="login"
+          (click)="auth.signOut()"
+          >Logout</a
+        >
       </div>
     </div>
   </div>

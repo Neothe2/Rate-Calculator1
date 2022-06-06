@@ -893,3 +893,31 @@ a {
     font-size: 1.6rem;
   }
 }
+
+/* Navbar things */
+
+.container-fluid {
+  padding: 0;
+}
+
+.nav-link {
+  font-size: 2.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .nav-link {
+    margin-left: 0.5rem;
+  }
+}
+
+/* User management */
+
+.user-management-table {
+  max-width: 1140px;
+}
+
+.user-management {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
