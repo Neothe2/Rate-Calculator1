@@ -3,11 +3,12 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+
 @Injectable({
   providedIn: 'root',
 })
-export class RecordService {
-  dbPath = '/users';
+export class ApartmentService {
+  dbPath = '/apartments';
   recordRef: AngularFirestoreCollection<any>;
   constructor(private db: AngularFirestore) {
     this.recordRef = db.collection(this.dbPath);
