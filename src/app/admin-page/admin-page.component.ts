@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { ApartmentService } from '../apartment.service';
 import { AuthService } from '../core/auth.service';
+import { GlobalPriceRangeService } from '../global-price-range.service';
 import { User } from '../models/user.model';
 import { RecordService } from '../record.service';
 
@@ -23,8 +24,8 @@ export class AdminPageComponent {
     apartmentName: new FormControl('', Validators.required),
     associationName: new FormControl('', Validators.required),
     numOfFamilies: new FormControl('', Validators.required),
-    minPricePerFamily: new FormControl('', Validators.required),
-    maxPricePerFamily: new FormControl('', Validators.required),
+    minPricePerFamily: new FormControl(''),
+    maxPricePerFamily: new FormControl(''),
   });
   updateForm: FormGroup;
   updateId: string = '';
@@ -64,7 +65,8 @@ export class AdminPageComponent {
   constructor(
     public service: ApartmentService,
     public afs: AngularFirestore,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public gprs: GlobalPriceRangeService
   ) {
     this.people$ = service.getRecordList().valueChanges({ idField: 'id' });
 
@@ -72,8 +74,23 @@ export class AdminPageComponent {
       apartmentName: ['', Validators.required],
       associationName: ['', Validators.required],
       numOfFamilies: ['', [Validators.required]],
-      minPricePerFamily: ['', Validators.required],
-      maxPricePerFamily: ['', Validators.required],
+      minPricePerFamily: [''],
+      maxPricePerFamily: [''],
+    });
+
+    // document.getElementById('global-min-price').textContent = this.gprs
+    //   .getMinValue()
+    //   .toString();
+  }
+
+  updateMinValue(event) {
+    this.gprs.updateRecord('Min-Price-per-Family', {
+      value: event.target.value,
+    });
+  }
+  updateMaxValue(event) {
+    this.gprs.updateRecord('Max-Price-per-Family', {
+      value: event.target.value,
     });
   }
 

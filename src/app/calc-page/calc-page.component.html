@@ -1,28 +1,30 @@
-<div *ngIf="auth.user$ | async; then authenticated; else guest">
-  <!-- template will replace this div -->
-</div>
+<h1>
+  <span class="not-in-mobile">Total Number of Families are:</span>
+  {{ TotFamilies }}
+</h1>
 
-<!-- User NOT logged in -->
-<ng-template #guest> </ng-template>
-
-<!-- User logged in -->
-<ng-template #authenticated>
-  <h1 class="first-page">This is the first page</h1>
-  <table>
-    <tr>
-      <td>13245</td>
-      <td>12345</td>
-      <td>12345</td>
+<table class="table table-striped table-bordered">
+  <thead>
+    <th scope="col">Apartment Name</th>
+    <th scope="col">Assosiation Name</th>
+    <th scope="col">No. of Families</th>
+    <th scope="col"></th>
+  </thead>
+  <tbody *ngFor="let apartment of Apartments">
+    <tr (click)="select(apartment)">
+      <td>{{ apartment.apartmentName }}</td>
+      <td>{{ apartment.associationName }}</td>
+      <td>{{ apartment.numOfFamilies }}</td>
+      <td>
+        <i
+          class="bi bi-square ps-5"
+          *ngIf="!selectedAPTS.includes(apartment)"
+        ></i>
+        <i
+          class="bi bi-check-square ps-5"
+          *ngIf="selectedAPTS.includes(apartment)"
+        ></i>
+      </td>
     </tr>
-    <tr>
-      <td>13245</td>
-      <td>12345</td>
-      <td>12345</td>
-    </tr>
-    <tr>
-      <td>13245</td>
-      <td>12345</td>
-      <td>12345</td>
-    </tr>
-  </table>
-</ng-template>
+  </tbody>
+</table>

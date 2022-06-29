@@ -6,42 +6,65 @@
   >
     Add Apartment
   </button>
-  <table class="table table-hover table-bordered apartment-table">
-    <thead>
-      <tr>
-        <th class="col">Name</th>
-        <th class="col">Association Name</th>
-        <th class="col">NO. of Families</th>
-        <th class="col">Min Price per Family</th>
-        <th class="col">Max Price per Family</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let person of people$ | async">
-      <tr>
-        <td>{{ person.apartmentName }}</td>
-        <td>{{ person.associationName }}</td>
-        <td>{{ person.numOfFamilies }}</td>
-        <td>{{ person.minPricePerFamily }}</td>
-        <td>{{ person.maxPricePerFamily }}</td>
-        <td>
-          <button
-            (click)="updateButton(person, person.id)"
-            data-bs-toggle="modal"
-            data-bs-target="#updateModal"
-            class="btn btn-warning edit btn-lg"
-          >
-            <i class="fas fa-pen fa-lg"></i></button
-          ><button
-            (click)="delete(person.id)"
-            class="btn btn-danger delete btn-lg"
-          >
-            <i class="fas fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr></tr>
-    </tbody>
-  </table>
+  <div class="card minmax_card">
+    <div class="card-body">
+      <input
+        class="text-center input admin__input"
+        id="global-min-price"
+        placeholder="Min Price per Family"
+        type="number"
+        (keyup)="updateMinValue($event)"
+      />
+      <input
+        class="text-center input admin__input"
+        placeholder="Max Price per Family"
+        id="global-min-price"
+        type="number"
+        (keyup)="updateMaxValue($event)"
+      />
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-hover apartment-table">
+        <thead class="thead-dark">
+          <tr class="">
+            <th scope="col">Name</th>
+            <th scope="col">Association Name</th>
+            <th scope="col">NO. of Families</th>
+            <th scope="col">Min Price per Family</th>
+            <th scope="col">Max Price per Family</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let person of people$ | async">
+          <tr scope="row">
+            <td>{{ person.apartmentName }}</td>
+            <td>{{ person.associationName }}</td>
+            <td>{{ person.numOfFamilies }}</td>
+            <td>{{ person.minPricePerFamily }}</td>
+            <td>{{ person.maxPricePerFamily }}</td>
+            <td>
+              <button
+                (click)="updateButton(person, person.id)"
+                data-bs-toggle="modal"
+                data-bs-target="#updateModal"
+                class="btn btn-warning edit btn-lg"
+              >
+                <i class="fas fa-pen fa-lg"></i></button
+              ><button
+                (click)="delete(person.id)"
+                class="btn btn-danger delete btn-lg"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!--Popup-->
 
@@ -110,7 +133,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber">*Min Price per Family</label>
+              <label for="phoneNumber">Min Price per Family (optional)</label>
               <input
                 formControlName="minPricePerFamily"
                 id="phoneNumber"
@@ -126,7 +149,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber">*Max Price per Family</label>
+              <label for="phoneNumber">Max Price per Family (optional)</label>
               <input
                 formControlName="maxPricePerFamily"
                 id="phoneNumber"
@@ -230,7 +253,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber">*Min Price per Family</label>
+              <label for="phoneNumber">Min Price per Family (optional)</label>
               <input
                 formControlName="minPricePerFamily"
                 id="phoneNumber"
@@ -248,7 +271,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber">*Max Price per Family</label>
+              <label for="phoneNumber">Max Price per Family (optional)</label>
               <input
                 formControlName="maxPricePerFamily"
                 id="phoneNumber"

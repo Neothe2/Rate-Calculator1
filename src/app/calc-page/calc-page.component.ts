@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ApartmentService } from '../apartment.service';
 import { AuthService } from '../core/auth.service';
 import { User } from '../models/user.model';
 
@@ -9,7 +10,41 @@ import { User } from '../models/user.model';
   styleUrls: ['./calc-page.component.css'],
 })
 export class CalcPageComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  selectedAPTS = [];
+  Apartments = [];
+  TotFamilies = 0;
+
+  constructor(public auth: AuthService, public db: ApartmentService) {
+    this.db
+      .getRecordList()
+      .valueChanges({ idField: 'id' })
+      .subscribe((data) => {
+        this.Apartments = data;
+      });
+  }
+
+  select(apartment) {
+    console.log(apartment);
+    if (!this.selectedAPTS.includes(apartment)) {
+      this.selectedAPTS.push(apartment);
+      this.calculate();
+      return;
+    }
+    for (let i of this.Apartments) {
+      if (i.id == apartment.id) {
+        this.selectedAPTS.splice(this.selectedAPTS.indexOf(i), 1);
+        this.calculate();
+        return;
+      }
+    }
+  }
+
+  calculate() {
+    this.TotFamilies = 0;
+    for (let apartment of this.selectedAPTS) {
+      this.TotFamilies += apartment.numOfFamilies;
+    }
+  }
 
   ngOnInit(): void {}
 }
