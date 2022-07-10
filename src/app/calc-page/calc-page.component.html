@@ -29,9 +29,13 @@
 </table> -->
 <div class="calc-page">
   <p class="total">
-    <span class="not-in-mobile">The total amount is Rs.</span>{{ TotFamilies }}
+    <span class="not-in-mobile">Number of Apartments Selected: </span>{{ selectedAPTS.length }}
+  </p> <p class="total">
+    <span class="not-in-mobile">Total Number of Families: </span>{{ TotFamiliesSelected }}
   </p>
-  <div class="card">
+  <p class="total">
+    <span class="not-in-mobile">The Total Amount is Rs.</span>{{ TotAmount }}
+  </p> <div class="card">
     <div class="card-body">
       <table class="table table-bordered calc-page__table">
         <thead>
