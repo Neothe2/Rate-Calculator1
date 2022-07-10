@@ -13,6 +13,7 @@
         id="global-min-price"
         placeholder="Min Price per Family"
         type="number"
+        value="{{global_min_value.value}}"
         (keyup)="updateMinValue($event)"
       />
       <input
@@ -20,6 +21,7 @@
         placeholder="Max Price per Family"
         id="global-min-price"
         type="number"
+        value="{{global_max_value.value}}"
         (keyup)="updateMaxValue($event)"
       />
     </div>
@@ -133,7 +135,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber">Min Price per Family (optional)</label>
+              <label for="phoneNumber">*Min Price per Family</label>
               <input
                 formControlName="minPricePerFamily"
                 id="phoneNumber"
@@ -149,7 +151,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber">Max Price per Family (optional)</label>
+              <label for="phoneNumber">*Max Price per Family</label>
               <input
                 formControlName="maxPricePerFamily"
                 id="phoneNumber"
@@ -309,3 +311,10 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  document.getElementById("global-min-price").textContent = this.gprs
+    .getMinValue()
+    .toString();
+  console.log(this.gprs.getMinValue());
+</script>

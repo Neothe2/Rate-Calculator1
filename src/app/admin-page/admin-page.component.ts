@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import {
   FormBuilder,
   FormControl,
@@ -19,6 +22,10 @@ import { RecordService } from '../record.service';
   styleUrls: ['./admin-page.component.css'],
 })
 export class AdminPageComponent {
+  global_min_value: any;
+  global_max_value: any;
+  global_price_range_list;
+  recordRef: AngularFirestoreCollection<any>;
   people$: Observable<any[]>;
   addForm = new FormGroup({
     apartmentName: new FormControl('', Validators.required),
@@ -66,21 +73,34 @@ export class AdminPageComponent {
     public service: ApartmentService,
     public afs: AngularFirestore,
     public fb: FormBuilder,
-    public gprs: GlobalPriceRangeService
+    public gprs: GlobalPriceRangeService,
+    public db: AngularFirestore
   ) {
+
     this.people$ = service.getRecordList().valueChanges({ idField: 'id' });
 
     this.updateForm = this.fb.group({
       apartmentName: ['', Validators.required],
       associationName: ['', Validators.required],
       numOfFamilies: ['', [Validators.required]],
-      minPricePerFamily: [''],
-      maxPricePerFamily: [''],
+      minPricePerFamily: ['', [Validators.required]],
+      maxPricePerFamily: ['', [Validators.required]],
     });
 
-    // document.getElementById('global-min-price').textContent = this.gprs
-    //   .getMinValue()
-    //   .toString();
+    let a;
+    this.recordRef = this.db.collection('/global-price-ranges');
+    this.gprs
+      .getRecordList()
+      .valueChanges()
+      .subscribe((list) => {
+        this.global_min_value = list[1];
+        this.global_max_value = list[0];
+        console.log(this.global_min_value);
+        console.log(list[0]);
+      });
+
+
+    console.log(this.global_price_range_list);
   }
 
   updateMinValue(event) {
@@ -98,13 +118,29 @@ export class AdminPageComponent {
     this.service.deleteRecord(personid);
   }
 
+  minPrice() {
+    if (this.minPricePerFamily.value > this.global_min_value.value && this.minPricePerFamily.value < this.global_max_value.value && !null) {
+      return this.minPricePerFamily.value;
+    }
+    return this.global_min_value.value;
+  }
+  maxPrice() {
+    if (this.maxPricePerFamily.value < this.global_max_value.value && 0 < this.maxPricePerFamily.value) {
+      return this.maxPricePerFamily.value;
+    }
+    else return this.global_max_value.value;
+    return this.global_max_value.value;
+  }
+
   add() {
     let person = {
       apartmentName: this.apartmentName?.value,
       associationName: this.associationName?.value,
       numOfFamilies: this.numOfFamilies?.value,
+      // maxPricePerFamily: this.maxPrice(),
       maxPricePerFamily: this.maxPricePerFamily?.value,
-      minPricePerFamily: this.minPricePerFamily?.value,
+     minPricePerFamily: this.minPricePerFamily?.value,
+      // minPricePerFamily: this.minPrice()
     };
 
     this.service.createRecord(person);

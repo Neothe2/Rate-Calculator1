@@ -10,8 +10,17 @@ import {
 export class GlobalPriceRangeService {
   dbPath = '/global-price-ranges';
   recordRef: AngularFirestoreCollection<any>;
+  maxValue: number;
   constructor(private db: AngularFirestore) {
     this.recordRef = db.collection(this.dbPath);
+    // this.getRecordList()
+    //   .valueChanges()
+    //   .subscribe((list) => {
+    //     console.log(list);
+    //     console.log(list[0].value);
+    //     this.maxValue = list[0].value;
+    //     console.log(this.maxValue);
+    //   });
   }
   createRecord(record: any): void {
     this.recordRef.add({ ...record });
@@ -34,13 +43,19 @@ export class GlobalPriceRangeService {
       });
     return a;
   }
-  getMaxValue() {
-    this.getRecordList()
+  async getMaxValue(): Promise<any> {
+    this.recordRef
+      .doc('Min-Price-per-Family')
       .valueChanges()
-      .subscribe((list) => {
-        console.log(list);
-        console.log(list[0].value);
-        return list[0].value;
+      .subscribe((data) => {
+        return data;
       });
+    // .valueChanges()
+    // .subscribe((list) => {
+    //   console.log(list);
+    //   console.log(list[0].value);
+    //   this.maxValue = list[0].value;
+    //   console.log(this.maxValue);
+    // });
   }
 }

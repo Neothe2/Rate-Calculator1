@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApartmentService } from '../apartment.service';
 import { AuthService } from '../core/auth.service';
+import { GlobalPriceRangeService } from '../global-price-range.service';
 import { User } from '../models/user.model';
 
 @Component({
@@ -14,7 +15,7 @@ export class CalcPageComponent implements OnInit {
   Apartments = [];
   TotFamilies = 0;
 
-  constructor(public auth: AuthService, public db: ApartmentService) {
+  constructor(public auth: AuthService, public db: ApartmentService, public gprs: GlobalPriceRangeService) {
     this.db
       .getRecordList()
       .valueChanges({ idField: 'id' })
@@ -42,7 +43,7 @@ export class CalcPageComponent implements OnInit {
   calculate() {
     this.TotFamilies = 0;
     for (let apartment of this.selectedAPTS) {
-      this.TotFamilies += apartment.numOfFamilies;
+      this.TotFamilies += apartment.numOfFamilies * apartment.maxPricePerFamily;
     }
   }
 
