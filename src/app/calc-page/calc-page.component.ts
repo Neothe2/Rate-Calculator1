@@ -14,7 +14,10 @@ export class CalcPageComponent implements OnInit {
   selectedAPTS = [];
   Apartments = [];
   TotAmount = 0;
+  GrandTotal = 0;
   TotFamiliesSelected = 0;
+  global_min_value = 0;
+  global_max_value = 0;
 
   constructor(public auth: AuthService, public db: ApartmentService, public gprs: GlobalPriceRangeService) {
     this.db
@@ -23,10 +26,13 @@ export class CalcPageComponent implements OnInit {
       .subscribe((data) => {
         this.Apartments = data;
       });
+    this.gprs.getRecordList().valueChanges({ idField: 'id' }).subscribe(list => {
+      this.global_min_value = list[1].value;
+      this.global_max_value = list[0].value;
+    })
   }
 
   select(apartment) {
-    console.log(apartment);
     if (!this.selectedAPTS.includes(apartment)) {
       this.selectedAPTS.push(apartment);
       this.calculate();
@@ -44,34 +50,50 @@ export class CalcPageComponent implements OnInit {
   calculate() {
     this.TotAmount = 0;
     this.TotFamiliesSelected = 0;
+    this.GrandTotal = 0;
     let x1 = 1;
     let x2 = 0;
-    let y1 = 140;
-    let y2 = 30;
+    let y1 = 0;
+    let y2 = 0;
 
     for (let apartment of this.Apartments) {
       x2 += apartment.numOfFamilies;
-    }
-    let m = (y2-y1)/(x2-x1);
-    // finding c
-    let c = y1 - m
+    }    
 
 
-
-    for (let apartment of this.selectedAPTS) {
+    for (let apartment of this.selectedAPTS) {  
       this.TotFamiliesSelected += apartment.numOfFamilies;
-      this.TotAmount += m * apartment.numOfFamilies + y2;
     }
-    this.TotAmount = (Math.round( m * this.TotFamiliesSelected + c)) * this.TotFamiliesSelected;
 
-    console.log(this.TotFamiliesSelected)
-    console.log(x1)
-    console.log(x2)
-    console.log(y1)
-    console.log(y2)
-    console.log(m)
-    console.log(this.TotFamiliesSelected)
+    for (let apartment of this.selectedAPTS) {    
+      y1 =  this.global_max_value;
+      y2 = this.global_min_value;
+
+      let m = (y2-y1)/(x2-x1);
+      // finding c
+      let c = y1 - m
+
+
+      let ratePerFamily = (Math.round( m * this.TotFamiliesSelected + c))
+      let ratePerFamilyPerApt = 0;
+
+      if (ratePerFamily > apartment.maxPricePerFamily){
+        ratePerFamilyPerApt = apartment.maxPricePerFamily;
+      }else if (ratePerFamily < apartment.minPricePerFamily){
+        ratePerFamilyPerApt = apartment.minPricePerFamily;
+      }else{
+        ratePerFamilyPerApt= ratePerFamily;
+      }
+    
+      this.TotAmount = ratePerFamilyPerApt * apartment.numOfFamilies;
+
+      this.GrandTotal += this.TotAmount;
+
+      console.log(ratePerFamily + " " + ratePerFamilyPerApt)
+
   }
+  
+}
 
   ngOnInit(): void {}
 }
