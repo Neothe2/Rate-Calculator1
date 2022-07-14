@@ -1,41 +1,23 @@
-<!-- <p class="total">
-  <span class="not-in-mobile">The total amount is Rs.</span>{{ TotFamilies }}
-</p>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <th scope="col">Apartment Name</th>
-    <th scope="col">Assosiation Name</th>
-    <th scope="col">No. of Families</th>
-    <th scope="col"></th>
-  </thead>
-  <tbody *ngFor="let apartment of Apartments">
-    <tr (click)="select(apartment)">
-      <td>{{ apartment.apartmentName }}</td>
-      <td>{{ apartment.associationName }}</td>
-      <td>{{ apartment.numOfFamilies }}</td>
-      <td>
-        <i
-          class="bi bi-square ps-5"
-          *ngIf="!selectedAPTS.includes(apartment)"
-        ></i>
-        <i
-          class="bi bi-check-square ps-5"
-          *ngIf="selectedAPTS.includes(apartment)"
-        ></i>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
-<div class="calc-page">
-  <p class="total">
-    <span class="not-in-mobile">Number of Apartments Selected: </span>{{ selectedAPTS.length }}
-  </p> <p class="total">
-    <span class="not-in-mobile">Total Number of Families: </span>{{ TotFamiliesSelected }}
-  </p>
-  <p class="total">
-    <span class="not-in-mobile">The Total Amount is Rs.</span>{{ GrandTotal }}
-  </p> <div class="card">
+<div class="calc-page container div">
+  <div>
+    <div class="card calc__main-calcs fixed-top">
+      <div class="card-body">
+        <p class="total">
+          <span class="not-in-mobile">Number of Apartments Selected: </span>{{ selectedAPTS.length }}
+        </p> <p class="total">
+          <span class="not-in-mobile">Total Number of Families: </span>{{ TotFamiliesSelected }}
+        </p>
+        <p class="total">
+          <span class="not-in-mobile">The Total Amount is Rs.</span>{{ GrandTotal }}
+        </p>
+      </div>
+    </div>        
+  </div>
+
+  
+  <div class="container calc-page__table-container">
+      <div class="card">
     <div class="card-body">
       <table class="table table-bordered calc-page__table">
         <thead>
@@ -63,6 +45,9 @@
         </tbody>
       </table>  
     </div>
+  </div>  
+
   </div>
 
 </div>
+<div style="color: dodgerblue; height: 100vh;"></div>

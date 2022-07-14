@@ -966,7 +966,7 @@ a {
 
 .total {
   color: #000;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .calc-page {
@@ -976,6 +976,23 @@ a {
   align-items: center;
 }
 
-.calc-page__table {
-  
+.calc-page__table > td {
+  padding: 0 15px;
+}
+
+.calc__main-calcs {
+  margin-top: 7rem;
+  margin-bottom: 2rem;
+  margin: 9rem auto;
+}
+
+.calc__main-calcs > .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+}
+
+.calc-page__table-container { 
+  padding-top: 25rem;
 }
