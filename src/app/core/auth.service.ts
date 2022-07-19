@@ -56,7 +56,7 @@ export class AuthService {
       `users/${user.uid}`
     );
     let data;
-    if (user) {
+    if (user.roles.admin) {
       data = {
         uid: user.uid,
         email: user.email,
