@@ -253,6 +253,7 @@ a {
 
 .btn--accent:hover {
   background: #ec3000;
+  color: #fff;
 }
 
 .btn--stretched {
