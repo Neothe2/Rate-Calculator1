@@ -36,14 +36,13 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    console.log(credential);
     let users: User[];
     this.fs
       .getRecordList()
       .valueChanges()
       .subscribe((data) => (users = data));
     console.log(users);
-
-    this.router.navigate(['/']);
 
     return this.updateUserData(credential.user);
   }
@@ -55,28 +54,26 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
-    let data;
-    if (user.roles.admin) {
-      data = {
+    if (user.roles.admin != true) {
+      let data = {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
         roles: {
           normal: true,
-          admin: true,
+          admin: false
         },
       };
-    } else {
-      data = {
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName,
-        roles: {
-          normal: true,
-          admin: false,
-        },
-      };
+      return userRef.set(data, { merge: true });
     }
+    let data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      roles: {
+        normal: true,
+      },
+    };
     return userRef.set(data, { merge: true });
   }
 
