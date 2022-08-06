@@ -61,7 +61,7 @@ export class CalcPageComponent implements OnInit {
     }    
 
 
-    for (let apartment of this.selectedAPTS) {  
+    for (let apartment of this.selectedAPTS) { 
       this.TotFamiliesSelected += apartment.numOfFamilies;
     }
 

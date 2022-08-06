@@ -41,7 +41,7 @@
             </tr>
           </thead>
           <tbody *ngFor="let person of people$ | async">
-            <tr scope="row">
+            <tr scope="row" class="calc-page__table__tr">
               <td>{{ person.apartmentName }}</td>
               <td>{{ person.associationName }}</td>
               <td>{{ person.numOfFamilies }}</td>
