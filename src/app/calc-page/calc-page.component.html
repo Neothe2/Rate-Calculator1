@@ -17,9 +17,27 @@
 
   
   <div class="container calc-page__table-container">
-      <div class="card">
-    <div class="card-body">
-      <table class="table table-bordered calc-page__table">
+      <ag-grid-angular
+        [rowData]="Apartments"
+        [columnDefs]="colDefs"
+        class="ag-theme-alpine"
+        [defaultColDef]="defaultColDef"
+        [rowSelection]="'multiple'"
+        [animateRows]="true"
+        [rowMultiSelectWithClick]="true"
+
+        (firstDataRendered)="onFirstDataRedndered($event)"
+        (selectionChanged)="calculate()"
+        style="height: 100vh; width: auto">
+      >
+
+      </ag-grid-angular>
+    </div>
+
+
+
+
+      <!-- <table class="table table-bordered calc-page__table">
         <thead>
           <th class="calc-page__table__th" scope="col">Apartment Name</th>
           <th class="calc-page__table__th" scope="col">Association Name</th>
@@ -27,6 +45,7 @@
           <th class="calc-page__table__th" scope="col"></th>
         </thead>
         <tbody *ngFor="let apartment of Apartments">
+          
           <tr (click)="select(apartment)">
             <td class="calc-page__table__td">{{ apartment.apartmentName }}</td>
             <td class="calc-page__table__td">{{ apartment.associationName }}</td>
@@ -42,12 +61,21 @@
               ></i>
             </td>
           </tr>
+          
         </tbody>
-      </table>  
-    </div>
-  </div>  
+      </table>   -->
+<!-- <ag-grid-angular
+  [rowData]="Apartments"
+  [columnDefs]="colDefs"
+  class="ag-theme-alpine"
+  [defaultColDef]="defaultColDef"
+  [rowSelection]="'multiple'"
+  [animateRows]="true"
+  [rowMultiSelectWithClick]="true"
+  
+  (selectionChanged)="calculate()"
+  style="height: 500px; width: 500px;">
+>
 
-  </div>
-
-</div>
-<div style="color: dodgerblue; height: 100vh;"></div>
+</ag-grid-angular>
+<div style="color: dodgerblue; height: 100vh;"></div> -->

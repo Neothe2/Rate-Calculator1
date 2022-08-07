@@ -16,6 +16,8 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgGridModule } from "ag-grid-angular";
+import { GridApi } from 'ag-grid-community';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CommonModule,
+    AgGridModule
   ],
-  providers: [AdminGuard, UserGuard],
+  providers: [AdminGuard, UserGuard, GridApi],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

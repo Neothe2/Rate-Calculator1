@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColumnApi, GridApi } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { ApartmentService } from '../apartment.service';
 import { AuthService } from '../core/auth.service';
 import { GlobalPriceRangeService } from '../global-price-range.service';
-import { User } from '../models/user.model';
+  import { FirstDataRenderedEvent } from 'ag-grid-community';
+  import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-calc-page',
@@ -11,6 +14,10 @@ import { User } from '../models/user.model';
   styleUrls: ['./calc-page.component.css'],
 })
 export class CalcPageComponent implements OnInit {
+  @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
+  private gridColumnApi: ColumnApi;
+  private gridApi: GridApi
+  
   selectedAPTS = [];
   Apartments = [];
   TotAmount = 0;
@@ -19,7 +26,17 @@ export class CalcPageComponent implements OnInit {
   global_min_value = 0;
   global_max_value = 0;
 
+  colDefs = [
+    {field: "apartmentName", checkboxSelection: true, headerCheckboxSelection: true},
+    {field: "associationName"},
+    {field: "numOfFamilies"},
+  ]
+  defaultColDef = {
+    sortable: true, filter: true, resizable: true,
+  }
+
   constructor(public auth: AuthService, public db: ApartmentService, public gprs: GlobalPriceRangeService) {
+    this.gridApi = new GridApi;
     this.db
       .getRecordList()
       .valueChanges({ idField: 'id' })
@@ -30,6 +47,10 @@ export class CalcPageComponent implements OnInit {
       this.global_min_value = list[1].value;
       this.global_max_value = list[0].value;
     })
+  }
+
+  public onFirstDataRedndered(event: FirstDataRenderedEvent){
+      event.api.sizeColumnsToFit();
   }
 
   select(apartment) {
@@ -48,6 +69,8 @@ export class CalcPageComponent implements OnInit {
   }
 
   calculate() {
+    let selectedAPTS = this.agGrid.api.getSelectedRows()
+    this.selectedAPTS = selectedAPTS;
     this.TotAmount = 0;
     this.TotFamiliesSelected = 0;
     this.GrandTotal = 0;
@@ -61,11 +84,11 @@ export class CalcPageComponent implements OnInit {
     }    
 
 
-    for (let apartment of this.selectedAPTS) { 
+    for (let apartment of selectedAPTS) { 
       this.TotFamiliesSelected += apartment.numOfFamilies;
     }
 
-    for (let apartment of this.selectedAPTS) {    
+    for (let apartment of selectedAPTS) {    
       y1 =  this.global_max_value;
       y2 = this.global_min_value;
 
