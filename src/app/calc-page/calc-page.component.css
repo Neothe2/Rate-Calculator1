@@ -1,3 +1,7 @@
 .first-page {
   margin-top: 1rem;
 }
+.ag-theme-alpine .ag-header-cell,
+.ag-theme-alpine .ag-header-group-cell {
+        padding-right: 0px !important;
+}

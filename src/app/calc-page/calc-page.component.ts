@@ -32,7 +32,7 @@ export class CalcPageComponent implements OnInit {
     {field: "numOfFamilies"},
   ]
   defaultColDef = {
-    sortable: true, filter: true, resizable: true,
+    sortable: true, filter: true, resizable: true, suppressColumnMoveAnimation: true, minWidth: 230, wrapText: true, autoHeight: true, suppressMovable: true, enableSorting: true, enableFilter: true,
   }
 
   constructor(public auth: AuthService, public db: ApartmentService, public gprs: GlobalPriceRangeService) {

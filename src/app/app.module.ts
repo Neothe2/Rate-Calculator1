@@ -18,6 +18,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from "ag-grid-angular";
 import { GridApi } from 'ag-grid-community';
+import { LiftCalcComponent } from './lift-calc/lift-calc.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { GridApi } from 'ag-grid-community';
     LoginComponent,
     UserManagementComponent,
     NavBarComponent,
+    LiftCalcComponent,
   ],
   imports: [
     BrowserModule,
