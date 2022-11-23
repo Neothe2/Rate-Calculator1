@@ -1,0 +1,23 @@
+.body {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-nav {
+    width: 15rem;
+    height: 7rem;
+    border-radius: 15px;
+    font-size: medium;
+    margin: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+    .home-nav {
+        width: 22rem;
+        height: 15rem;
+        font-size: larger;
+        margin: 2rem;
+    }
+}

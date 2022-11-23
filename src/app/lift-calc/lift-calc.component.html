@@ -1,1 +1,29 @@
-<p>lift-calc works!</p>
+
+<div class="container" id="quick-filter2">
+    <p id="total-price" >Total Price: {{ totalPrice }}</p>
+    <input type="number" placeholder="Average Price per Apartment Complex" id="filter-text-box" (input)="onAveragePriceChanged($event)">
+</div>
+
+<div class="container" id="quick-filter">
+    <input type="text" placeholder="Search..." id="filter-text-box" (input)="onSearchChanged()">
+</div>
+<div class="container">
+
+    <ag-grid-angular
+    [rowData]="rowData"
+    [columnDefs]="colDefs"
+    [gridOptions]="gridOptions"
+    class="ag-theme-alpine"
+    [defaultColDef]="defaultColDef"
+    [rowSelection]="'multiple'"
+    [animateRows]="true"
+    [rowMultiSelectWithClick]="true"
+
+    (gridReady)="onGridReady($event)"
+    (firstDataRendered)="onFirstDataRedndered($event)"
+    (selectionChanged)="calculate()"
+    style="height: 100vh; width: auto">
+    >
+
+    </ag-grid-angular>
+</div>

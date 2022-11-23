@@ -1,0 +1,28 @@
+
+#quick-filter {
+    margin-top: 1.75rem;
+    margin-bottom: 1.6rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50rem;
+}
+
+#total-price {
+    color: black;
+}
+
+#quick-filter2 {
+    margin-top: 2rem;
+    margin-bottom: 1.125rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50rem;
+}
+
+@media screen and (max-width: 768px) {
+    #filter-text-box {
+        width: fit-content;
+    }
+}
