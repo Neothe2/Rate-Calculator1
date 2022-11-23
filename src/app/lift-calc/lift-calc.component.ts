@@ -49,9 +49,10 @@ export class LiftCalcComponent {
     event.api.sizeColumnsToFit();
   }
 
-  public onSearchChanged() {
+  public onSearchChanged($event) {
+    console.log('search')
     this.gridApi.setQuickFilter(
-      (document.getElementById('filter-text-box') as HTMLInputElement).value
+      ($event.target as HTMLInputElement).value
     )
 
   }
